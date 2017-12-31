@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="Audrix">
+
+<head>
+	<title ng-bind="'Audrix - ' + title "></title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="icon" href="/assets/images/audrix.png">
+
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Roboto:400,700,300,200,100|Indie+Flower:400,700,300,200,100|Dosis|Exo+2" rel="stylesheet">
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.css">
+	<link rel="stylesheet" href="/assets/css/fs.css">
+	<base href="/">
+	<style type="text/css" media="screen">
+	</style>
+</head>
+
+<body layout="column" ng-cloak id="body">
+	</script>
+	<div layout-padding ng-if="online === false" style="width:100%;height:100%;background-color: #4776E6;color:black;z-index: 102;text-align: center;position: absolute;">
+		<p style="font-size: 2.2em; color:rgba(0, 0, 0, .3);letter-spacing: 1.1px;margin-top: 250px;font-family: 'Roboto', sans-serif;font-weight: 700;">
+			Problem with Internet Connection.
+		</p>
+		<span style="font-size: 2.2em; color:rgba(0, 0, 0, .3);letter-spacing: 1.1px;margin-top: 250px;font-family: 'Roboto', sans-serif;font-weight: 700;">
+            	Please try again later.
+            </span>
+	</div>
+	<div id="loader-page" ng-if="bootstrapFlag && online" style="background-color: #2b3137;width: 100%;height: 100%;
+             color:black;z-index: 101;position: absolute;">
+
+		<div id="loader" data-text="Loading App...">
+			Loading App...
+		</div>
+		<div id="container" class="container">
+			<div class="circle-container">
+				<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+				<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+				<div class="circle"></div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container" layout="row" flex style="overflow: auto;">
+		<div ng-view flex></div>
+	</div>
+
+	</div>
+
+
+
+
+
+	<script type="text/javascript" src="/assets/libs/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="/assets/libs/angular/angular.js"></script>
+	<script type="text/javascript" src="/assets/libs/angular/angular-route.min.js"></script>
+	<script type="text/javascript" src="/assets/libs/angular/angular-animate.min.js"></script>
+	<script type="text/javascript" src="/assets/libs/angular/angular-aria.min.js"></script>
+	<script type="text/javascript" src="/assets/libs/angular/angular-messages.min.js"></script>
+	<script type="text/javascript" src="/assets/libs/angular-material.min.js"></script>
+	<script type="text/javascript" src="/assets/libs/angular-local-storage.min.js"></script>
+	<script type="text/javascript" src="/assets/libs/ng-infinite-scroll.min.js"></script>
+	<script src="//connect.facebook.net/en_US/sdk.js"></script>
+	<script type="text/javascript" src="app/app.route.js"></script>
+	<script type="text/javascript" src="app/components/app.ctrl.js"></script>
+	<script type="text/javascript" src="app/shared/audrixDirectives.js"></script>
+	<script type="text/javascript" src="app/shared/config.service.js"></script>
+	<script type="text/javascript" src="app/shared/audrixServices.js"></script>
+	<script type="text/javascript" src="node_modules/satellizer/dist/satellizer.min.js"></script>
+	<script type="text/javascript" src="node_modules/ng-file-upload/dist/ng-file-upload.min.js"></script>
+	<script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
+</body>
+
+</html>
