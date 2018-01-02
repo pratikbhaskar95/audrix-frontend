@@ -1,0 +1,59 @@
+<audrix-dashboard-header></audrix-dashboard-header>
+<div class="">
+  <audio class="music" preload="true">
+      <source src="/assets/music/Don't You Need Somebody.mp3" type="audio/mpeg"></source>
+  </audio>
+</div>
+<footer class="nowPlayingBar-container">
+  <div class="now-playing-bar">
+    <div class="now-playing-bar__left">
+        <!-- left -->
+    </div>
+    <div class="now-playing-bar__center">
+      <div class="player-controls">
+        <div class="player-controls__buttons">
+          <button type="button" name="button" class="control-button">
+            <i class="material-icons">shuffle</i>
+          </button>
+          <button type="button" name="button" class="control-button">
+            <i class="material-icons">skip_previous</i>
+          </button>
+          <button type="button" name="button" class="control-button" ng-click="playAudio()" ng-if="!play">
+            <i class="material-icons" style="font-size: 48px;margin: -12px;">pause_circle_outline</i>
+          </button>
+          <button type="button" name="button" class="control-button" ng-click="playAudio()" ng-if="play">
+            <i class="material-icons" style="font-size: 48px;margin: -12px;">play_circle_outline</i>
+          </button>
+          <button type="button" name="button" class="control-button">
+            <i class="material-icons">skip_next</i>
+          </button>
+          <button type="button" name="button" class="control-button">
+            <i class="material-icons">repeat</i>
+          </button>
+        </div>
+        <div class="playback-bar">
+          <div class="playback-bar__progress-time">
+            00:00
+          </div>
+          <div style="width:100%;margin-top: 6px;margin-left: 6px;margin-right: 6px;">
+            <div class="progress-bar">
+              <div class="progress-bar__bg">
+                <div class="progress-bar__fg"></div>
+                <div class="progress-bar__slider">
+                  <div class="slider-head"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="playback-bar__total-progress-time">
+            00:00
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="now-playing-bar__right">
+      <!-- right -->
+    </div>
+
+  </div>
+</footer>

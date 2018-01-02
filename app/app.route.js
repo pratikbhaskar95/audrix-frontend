@@ -90,16 +90,12 @@ app.config(function ($routeProvider, $locationProvider, $mdThemingProvider,
 		templateUrl: 'app/components/auth/login.html',
 		title: 'Secure Login Page'
 	})
-	.when('/user/dashboard/:id', {
-		controller: 'UserController',
-		templateUrl: 'app/components/user/dashboard.html',
-		title: 'User Dashboard'
+	.when('/browse', {
+		controller: 'WebPlayerController',
+		templateUrl: 'app/components/web-player/player.html',
+		title: 'Browse'
 	})
-	.when('/user/dashboard/:id/upload', {
-		controller: 'fileUploadController',
-		templateUrl: 'app/components/user/fileUpload.html',
-		title: 'Secure File Upload'
-	})
+
 
 	.otherwise({redirectTo: '/'});
 	$locationProvider.html5Mode(true);
