@@ -7,7 +7,7 @@
 <footer class="nowPlayingBar-container">
   <div class="now-playing-bar">
     <div class="now-playing-bar__left">
-        <!-- left -->
+      <!-- left -->
     </div>
     <div class="now-playing-bar__center">
       <div class="player-controls">
@@ -52,8 +52,24 @@
       </div>
     </div>
     <div class="now-playing-bar__right">
-      <!-- right -->
+      <div class="extra-controls">
+        <div class="volume-bar">
+          <button type="button" name="button" class="control-button" style="top: -2px;">
+            <i class="material-icons" ng-show = "volumeUp">volume_up</i>
+            <i class="material-icons" ng-show = "volumeDown">volume_down</i>
+            <i class="material-icons" ng-show = "volumeMute">volume_mute</i>
+            <i class="material-icons" ng-show = "volumeOff">volume_off</i>
+          </button>
+          <div class="progress-bar">
+            <div class="progress-bar__bgv">
+              <div class="progress-bar__fg"></div>
+              <div class="progress-bar__sliderv">
+                <div class="slider-headv"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-
   </div>
 </footer>

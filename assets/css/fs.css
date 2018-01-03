@@ -10,6 +10,7 @@ a {
 
 #loader-page {
   position: absolute;
+  z-index: 1000;
 }
 
 #loader {
@@ -736,8 +737,8 @@ a {
   width: 30%;
   min-width: 180px;
   /*border: 1px solid #eee;*/
-  margin-top: 16px;
-  margin-bottom: 16px;
+  margin-top: 38px;
+  margin-bottom: 32px;
 }
 
 .playback-bar {
@@ -794,11 +795,9 @@ a {
   display: flex;
   height: 4px;
   width: 100%;
-  cursor: pointer;
 }
 
 .progress-bar__bg:not([disabled]):hover .progress-bar__slider {
-  cursor: pointer;
   background-color: #1db954;
 }
 
@@ -819,7 +818,7 @@ a {
   transition-property: transform;
   transition-duration: .1s;
   transition-timing-function: cubic-bezier(1, 0, .7, 1);
-  background-color: #fff;
+  background-color: #a0a0a0;
   border-radius: 0%;
   width: 0px;
   height: 4px;
@@ -828,6 +827,72 @@ a {
 }
 
 .slider-head {
+  transition-property: transform;
+  transition-duration: .1s;
+  transition-timing-function: cubic-bezier(1, 0, .7, 1);
+  background-color: #fff;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  z-index: 100;
+  margin-left: 99%;
+  position: relative;
+  top: -4px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .5);
+  transform: scale(0)
+}
+
+.extra-controls {}
+
+.volume-bar {
+  align-items: center;
+  width: 200px;
+  display: flex;
+  margin: 0 auto;
+}
+
+.progress-bar__bgv {
+  background-color: #404040;
+  border-radius: 2px;
+  display: flex;
+  height: 4px;
+  width: 100%;
+  max-width: 100%;
+  /*cursor: pointer;*/
+}
+
+.progress-bar__bgv:not([disabled]):hover .progress-bar__sliderv {
+  /*cursor: pointer;*/
+  background-color: #1db954;
+}
+
+.progress-bar__bgv:not([disabled]):hover .slider-headv {
+  transition-property: transform;
+  transition-duration: .1s;
+  transition-timing-function: cubic-bezier(.3, 0, 0, 1);
+  transform: scale(1);
+}
+
+.progress-bar__fgv {
+  background-color: #a0a0a0;
+  border-radius: 2px;
+  height: 4px;
+}
+
+.progress-bar__sliderv {
+  transition-property: transform;
+  transition-duration: .1s;
+  transition-timing-function: cubic-bezier(1, 0, .7, 1);
+  background-color: #a0a0a0;
+  border-radius: 0%;
+  width: 0px;
+  max-width: 100%;
+  height: 4px;
+  z-index: 100;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .5);
+}
+
+.slider-headv {
   transition-property: transform;
   transition-duration: .1s;
   transition-timing-function: cubic-bezier(1, 0, .7, 1);

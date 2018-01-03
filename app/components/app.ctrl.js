@@ -140,8 +140,11 @@ var app = angular.module('Audrix')
       $scope.user = localStorageService.get('user');
       $scope.username = $scope.user.username;
       $scope.fbProfile = false;
-      // $scope.pause = false;
       $scope.play = true;
+      $scope.volumeOff = false;
+      $scope.volumeUp = true;
+      $scope.volumeDown = false;
+      $scope.volumeMute = false;
 
       var music = document.querySelector('.music');
       var slider = document.querySelector('.progress-bar__slider');
@@ -151,7 +154,96 @@ var app = angular.module('Audrix')
       var timeline = document.querySelector('.progress-bar__bg');
       var timelineWidth = timeline.offsetWidth - slider.offsetWidth;
 
+      var timelinev = document.querySelector('.progress-bar__bgv');
+      var sliderv = document.querySelector('.progress-bar__sliderv');
+      var timelineWidthv = timelinev.offsetWidth - sliderv.offsetWidth;
+
+      sliderv.style.width = 100 + "%";
+
       var duration, songDuration, mediaTime;
+
+      // -----------------------------------------------------------------
+      // ----------- Functions for Volume Control ------------------------
+      // -----------------------------------------------------------------
+
+      timelinev.addEventListener("click", function(event) {
+        var offset = timelinev.getClientRects()[0];
+        var sliderOffset = sliderv.getClientRects()[0];
+        var position = event.clientX - offset.left;
+        var percentage = 100 * position / offset.width;
+        music.volume = (percentage / 100).toFixed(2);
+        sliderv.style.width = percentage + "%";
+
+        if (music.volume === 0) {
+          $scope.$apply(function() {
+            $scope.volumeOff = true;
+            $scope.volumeUp = false;
+            $scope.volumeDown = false;
+          })
+        } else if (music.volume > 0.5) {
+          $scope.$apply(function() {
+            $scope.volumeUp = true;
+            $scope.volumeDown = false;
+            $scope.volumeOff = false;
+          })
+        } else if (music.volume < 0.5) {
+          $scope.$apply(function() {
+            $scope.volumeDown = true;
+            $scope.volumeUp = false;
+            $scope.volumeOff = false;
+          })
+        } else {
+          $scope.$apply(function() {
+            $scope.volumeMute = true;
+          })
+        }
+      }, false);
+
+      sliderv.addEventListener('mousedown', mouseDownv, false);
+      sliderv.addEventListener('mouseup', mouseUpv, false);
+      // Boolean value so that audio position is updated only when the playhead is released
+      var onvolumehead = false;
+
+      function mouseDownv() {
+        onvolumehead = true;
+        // music.removeEventListener('timeupdate', timeUpdate, true)
+        sliderv.addEventListener('mousemove', movevolumehead, true);
+        // music.addEventListener('timeupdate', timeUpdate, false);
+      }
+
+      function mouseUpv(event) {
+        if (onvolumehead == true) {
+          // moveplayhead(event);
+          sliderv.removeEventListener('mousemove', movevolumehead, true);
+          // change current time
+          var offset = timelinev.getClientRects()[0];
+          var sliderOffset = sliderv.getClientRects()[0];
+          var position = event.clientX - offset.left;
+          var percentage = 100 * position / offset.width;
+          music.volume = (percentage / 100).toFixed(1);
+          sliderv.style.width = percentage + "%";
+
+          // var d = music.duration / offset.width;
+          // music.currentTime = (event.clientX - offset.left) * d;
+        }
+        onvolumehead = false;
+      }
+
+      function movevolumehead(event) {
+        var offset = timelinev.getClientRects()[0];
+        var sliderOffset = sliderv.getClientRects()[0];
+        var position = Math.floor(event.clientX - offset.left);
+        var percentage = (100 * position / offset.width).toFixed(0);
+        sliderv.style.width = percentage + "%";
+      }
+
+      function getPosition(el) {
+        return el.getBoundingClientRect().left;
+      }
+
+      // -----------------------------------------------------------------
+      // ----------- Functions for Music Control ------------------------
+      // -----------------------------------------------------------------
 
       music.addEventListener("timeupdate", timeUpdate, false);
       music.addEventListener("canplaythrough", function() {
@@ -180,7 +272,7 @@ var app = angular.module('Audrix')
       music.addEventListener("ended", function() {
         slider.style.width = 0;
         timer.textContent = '00:00';
-        $scope.$apply (function () {
+        $scope.$apply(function() {
           $scope.play = true;
         })
       })
@@ -208,7 +300,6 @@ var app = angular.module('Audrix')
 
         var barLength = 100 * (music.currentTime / music.duration);
         slider.style.width = barLength + '%';
-
       }
 
       timeline.addEventListener("click", function(event) {
@@ -224,19 +315,19 @@ var app = angular.module('Audrix')
       // makes playhead draggable
       slider.addEventListener('mousedown', mouseDown, false);
       window.addEventListener('mouseup', mouseUp, false);
-
       // Boolean value so that audio position is updated only when the playhead is released
       var onplayhead = false;
 
       function mouseDown() {
         onplayhead = true;
+        // music.removeEventListener('timeupdate', timeUpdate, true)
         window.addEventListener('mousemove', moveplayhead, true);
-        music.removeEventListener('timeupdate', timeUpdate, false);
+        // music.addEventListener('timeupdate', timeUpdate, false);
       }
 
       function mouseUp(event) {
         if (onplayhead == true) {
-          moveplayhead(event);
+          // moveplayhead(event);
           window.removeEventListener('mousemove', moveplayhead, true);
           // change current time
           var offset = timeline.getClientRects()[0];
@@ -253,7 +344,6 @@ var app = angular.module('Audrix')
         var sliderOffset = slider.getClientRects()[0];
         var d = music.duration / offset.width;
         var newSliderWidth = (event.clientX - offset.left);
-
         if (newSliderWidth >= 0 && newSliderWidth <= timelineWidth) {
           slider.style.width = newSliderWidth + "px";
         }
